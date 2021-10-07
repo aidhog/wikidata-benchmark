@@ -108,7 +108,7 @@ public class ParseNumericQueriesARQ {
 //			"rdf-schema#subPropertyOf"
 	};
 	
-	public static String OUTPUT = "data/num-queries-v2.tsv";
+	public static String OUTPUT = "num-queries-v2.tsv";
 
 	public static void main(String[] args) throws UnsupportedEncodingException, IOException, InterruptedException, HashCollisionException {
 

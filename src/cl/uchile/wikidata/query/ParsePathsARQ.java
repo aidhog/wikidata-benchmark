@@ -90,7 +90,7 @@ public class ParsePathsARQ {
 			"rdf-schema#subPropertyOf"
 	};
 	
-	public static String OUTPUT = "C:\\Users\\aidhog\\Documents\\Research\\papers\\2021\\efficient-paths\\queries\\paths.tsv";
+	public static String OUTPUT = "paths.tsv";
 
 	public static void main(String[] args) throws UnsupportedEncodingException, IOException, InterruptedException, HashCollisionException {
 

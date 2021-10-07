@@ -84,7 +84,7 @@ public class ParseOptsARQ {
 			"rdf-schema#subPropertyOf"
 	};
 	
-	public static String OUTPUT = "C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\opts-normalized.tsv";
+	public static String OUTPUT = "opts-normalized.tsv";
 
 	public static void main(String[] args) throws UnsupportedEncodingException, IOException, InterruptedException, HashCollisionException {
 
