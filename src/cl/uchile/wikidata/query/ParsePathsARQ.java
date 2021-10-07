@@ -31,14 +31,16 @@ import cl.uchile.dcc.blabel.label.GraphColouring.HashCollisionException;
 import cl.uchile.wikidata.query.ParseBGPsARQ.BGP;
 
 public class ParsePathsARQ {
+	static String INPUT_FOLDER = "data/queries/";
+	
 	static String[] INPUT = {
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I1_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I2_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I3_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I4_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I5_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I6_status500_Joined.tsv",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I7_status500_Joined.tsv"
+			INPUT_FOLDER+"I1_status500_Joined.tsv",
+			INPUT_FOLDER+"I2_status500_Joined.tsv",
+			INPUT_FOLDER+"I3_status500_Joined.tsv",
+			INPUT_FOLDER+"I4_status500_Joined.tsv",
+			INPUT_FOLDER+"I5_status500_Joined.tsv",
+			INPUT_FOLDER+"I6_status500_Joined.tsv",
+			INPUT_FOLDER+"I7_status500_Joined.tsv"
 	};
 	
 	static String[] VARS = {

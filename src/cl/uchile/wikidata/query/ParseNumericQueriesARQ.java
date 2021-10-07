@@ -50,24 +50,16 @@ import org.apache.jena.sparql.expr.aggregate.Aggregator;
 import cl.uchile.dcc.blabel.label.GraphColouring.HashCollisionException;
 
 public class ParseNumericQueriesARQ {
-//	static String[] INPUT = {
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I1_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I2_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I3_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I4_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I5_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I6_status500_Joined.tsv",
-//			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\I7_status500_Joined.tsv"
-//	};
+	static String INPUT_FOLDER = "data/queries/";
 	
 	static String[] INPUT = {
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2017-06-12_2017-07-09_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2017-07-10_2017-08-06_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2017-08-07_2017-09-03_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2017-12-03_2017-12-30_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2018-01-01_2018-01-28_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2018-01-29_2018-02-25_organic.tsv.gz",
-			"C:\\Users\\aidhog\\Documents\\Research\\papers\\2020\\wco-compact\\queries\\human\\2018-02-26_2018-03-25_organic.tsv.gz"
+			INPUT_FOLDER+"2017-06-12_2017-07-09_organic.tsv.gz",
+			INPUT_FOLDER+"2017-07-10_2017-08-06_organic.tsv.gz",
+			INPUT_FOLDER+"2017-08-07_2017-09-03_organic.tsv.gz",
+			INPUT_FOLDER+"2017-12-03_2017-12-30_organic.tsv.gz",
+			INPUT_FOLDER+"2018-01-01_2018-01-28_organic.tsv.gz",
+			INPUT_FOLDER+"2018-01-29_2018-02-25_organic.tsv.gz",
+			INPUT_FOLDER+"2018-02-26_2018-03-25_organic.tsv.gz"
 	};
 	
 	static String PROPERTIES = "data/num-props.txt";
