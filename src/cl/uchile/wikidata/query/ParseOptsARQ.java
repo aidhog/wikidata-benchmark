@@ -274,6 +274,57 @@ public class ParseOptsARQ {
 			return vars;
 		}
 		
+		public boolean isWellDesigned() {
+			TreeSet<Node> outerVars = new TreeSet<Node>();
+			return isWellDesigned(this, outerVars);
+		}
+		
+		private static boolean isWellDesigned(Opt op, TreeSet<Node> outerVars) {
+			TreeSet<Node> lvars = null;
+			TreeSet<Node> rvars = null;
+			
+			if(op.bright!=null) {
+				rvars = op.bright.getVars();
+			} else {
+				System.out.println("nested opt");
+				rvars = op.oright.getVars();
+			}
+			
+			if(op.bleft!=null) {
+				lvars = op.bleft.getVars();
+			} else {
+				lvars = op.oleft.getVars();
+			}
+			
+			for(Node v : rvars) {
+				if(outerVars.contains(v)) {
+					if(!lvars.contains(v)) {
+						return false;
+					}
+				}
+			}
+			
+			if(op.oleft!=null) {
+				TreeSet<Node> newOuterVars = new TreeSet<Node>();
+				newOuterVars.addAll(outerVars);
+				newOuterVars.addAll(rvars);
+				if(!isWellDesigned(op.oleft, newOuterVars)) {
+					return false;
+				}
+			}
+			
+			if(op.oright!=null) {
+				TreeSet<Node> newOuterVars = new TreeSet<Node>();
+				newOuterVars.addAll(outerVars);
+				newOuterVars.addAll(lvars);
+				if(!isWellDesigned(op.oright, newOuterVars)) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
 		public boolean hasCartesianProducts() {
 			TreeSet<Node> lvars = null;
 			TreeSet<Node> rvars = null;
@@ -303,6 +354,10 @@ public class ParseOptsARQ {
 				if(rvars.contains(left)) {
 					cartesian = false;
 				}
+			}
+			
+			if(cartesian) {
+				System.out.println(toString());
 			}
 			
 			return cartesian;
