@@ -20,15 +20,11 @@ import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.OpAsQuery;
 import org.apache.jena.sparql.algebra.op.Op1;
 import org.apache.jena.sparql.algebra.op.Op2;
-import org.apache.jena.sparql.algebra.op.OpBGP;
-import org.apache.jena.sparql.algebra.op.OpLeftJoin;
 import org.apache.jena.sparql.algebra.op.OpN;
 import org.apache.jena.sparql.algebra.op.OpPath;
 import org.apache.jena.sparql.expr.ExprEvalException;
-import org.semanticweb.yars.nx.Node;
 
 import cl.uchile.dcc.blabel.label.GraphColouring.HashCollisionException;
-import cl.uchile.wikidata.query.ParseBGPsARQ.BGP;
 
 public class ParsePathsARQ {
 	static String INPUT_FOLDER = "data/queries/";
@@ -247,140 +243,4 @@ public class ParsePathsARQ {
 			}
 		}
 	}
-	
-	public static class Opt {
-		OpLeftJoin opt;
-
-		Opt oleft = null;
-		Opt oright = null;
-		
-		BGP bleft = null;
-		BGP bright = null;
-		
-		public Opt(OpLeftJoin opt) throws InterruptedException, HashCollisionException {
-			this.opt = opt;
-			if(opt.getLeft() instanceof OpBGP) {
-				bleft = new BGP((OpBGP) opt.getLeft());
-			} else if(opt.getLeft() instanceof OpLeftJoin) {
-				oleft = new Opt((OpLeftJoin) opt.getLeft());
-			}
-			
-			if(opt.getRight() instanceof OpBGP) {
-				bright = new BGP((OpBGP) opt.getRight());
-			} else if(opt.getRight() instanceof OpLeftJoin) {
-				oright = new Opt((OpLeftJoin) opt.getRight());
-			}
-		}
-		
-		public TreeSet<Node> getVars() {
-			TreeSet<Node> vars = new TreeSet<Node>();
-			if(bleft!=null) {
-				vars.addAll(bleft.getVars());
-			} else if(oleft!=null) {
-				vars.addAll(oleft.getVars());
-			}
-			
-			if(bright!=null) {
-				vars.addAll(bright.getVars());
-			} else if(oright!=null) {
-				vars.addAll(oright.getVars());
-			}
-			
-			return vars;
-		}
-		
-		public boolean hasCartesianProducts() {
-			TreeSet<Node> lvars = null;
-			TreeSet<Node> rvars = null;
-			
-			if(bleft!=null) {
-				if(bleft.clr.getPartitionCount()>1)
-					return true;
-				lvars = bleft.getVars();
-			} else if(oleft!=null) {
-				if(oleft.hasCartesianProducts())
-					return true;
-				lvars = oleft.getVars();
-			}
-			
-			if(bright!=null) {
-				if(bright.clr.getPartitionCount()>1)
-					return true;
-				rvars = bright.getVars();
-			} else if(oright!=null) {
-				if(oright.hasCartesianProducts())
-					return true;
-				rvars = oright.getVars();
-			}
-			
-			boolean cartesian = true;
-			for(Node left:lvars) {
-				if(rvars.contains(left)) {
-					cartesian = false;
-				}
-			}
-			
-			return cartesian;
-		}
-		
-		public String getSignature() {
-			String hash = "";
-			
-			if(bleft!=null) {
-				hash+=bleft.getSignature();
-			} else if(oleft!=null) {
-				hash+=oleft.getSignature();
-			}
-			
-			hash += "OPT";
-			
-			if(bright!=null) {
-				hash+=bright.getSignature();
-			} else if(oright!=null) {
-				hash+=oright.getSignature();
-			}
-			
-			return hash;
-		}
-		
-		public String getSignatureVarId() {
-			String hash = "";
-			
-			if(bleft!=null) {
-				hash+=bleft.getSignatureVarId();
-			} else if(oleft!=null) {
-				hash+=oleft.getSignatureVarId();
-			}
-			
-			hash += "OPT";
-			
-			if(bright!=null) {
-				hash+=bright.getSignatureVarId();
-			} else if(oright!=null) {
-				hash+=oright.getSignatureVarId();
-			}
-			
-			return hash;
-		}
-		
-		public String toString() {
-			String left = null;
-			String right = null;
-			if(bleft!=null) {
-				left = bleft.toNonCanonicalisedString();
-			} else if(oleft!=null) {
-				left = oleft.toString();
-			}
-			
-			if(bright!=null) {
-				right = bright.toNonCanonicalisedString();
-			} else if(oright!=null) {
-				right = oright.toString();
-			}
-			
-			return "{ "+left+" } OPTIONAL { "+right+" }";
-		}
-		
-	}
-	
 }
